@@ -1,6 +1,8 @@
 # PPNP
 
-<img src="https://raw.githubusercontent.com/klicperajo/ppnp/master/ppnp_model.svg?sanitize=true">
+<p align="center">
+<img src="https://raw.githubusercontent.com/klicperajo/ppnp/master/ppnp_model.svg?sanitize=true" width="600">
+</p>
 
 Implementation of the model proposed in the paper: **[Combining Neural Networks with Personalized PageRank for Classification on Graphs](https://arxiv.org/abs/1810.05997)**
 
