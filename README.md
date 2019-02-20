@@ -1,5 +1,7 @@
 # PPNP
 
+<img src="https://raw.githubusercontent.com/klicperajo/ppnp/master/ppnp_model.svg?sanitize=true">
+
 Implementation of the model proposed in the paper: **[Combining Neural Networks with Personalized PageRank for Classification on Graphs](https://arxiv.org/abs/1810.05997)**
 
 by Johannes Klicpera, Aleksandar Bojchevski, Stephan Günnemann
