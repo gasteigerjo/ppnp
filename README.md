@@ -1,12 +1,15 @@
-# PPNP
+# PPNP and APPNP
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/klicperajo/ppnp/master/ppnp_model.svg?sanitize=true" width="600">
 </p>
 
-Implementation of the model proposed in the paper: **[Combining Neural Networks with Personalized PageRank for Classification on Graphs](https://arxiv.org/abs/1810.05997)**
+Implementation of the model proposed in the paper:
+
+**[Combining Neural Networks with Personalized PageRank for Classification on Graphs](https://arxiv.org/abs/1810.05997)**
 
 by Johannes Klicpera, Aleksandar Bojchevski, Stephan Günnemann
+
 Published at ICLR 2019.
 
 ## Requirements
@@ -33,3 +36,15 @@ MS Academic was originally published by Oleksandr Shchur, Maximilian Mumme, Alek
 
 ## Contact
 Please contact klicpera@in.tum.de in case you have any questions.
+
+## Cite
+Please cite our paper if you use the model or this code in your own work:
+
+```
+@inproceedings{klicpera_combining_2019,
+	title = {Combining Neural Networks with Personalized PageRank for Classification on Graphs},
+	author = {Klicpera, Johannes and Bojchevski, Aleksandar and Günnemann, Stephan},
+	booktitle={International Conference on Learning Representations (ICLR)},
+	year = {2019}
+}
+```
