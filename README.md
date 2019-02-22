@@ -26,12 +26,12 @@ In the `data` folder you can find several datasets.
 The Cora-ML graph was extracted by Aleksandar Bojchevski, and Stephan Günnemann. *"Deep gaussian embedding of attributed graphs: Unsupervised inductive learning via ranking."* ICLR 2018,   
 while the raw data was originally published by Andrew Kachites McCallum, Kamal Nigam, Jason Rennie, and Kristie Seymore. *"Automating the construction of internet portals with machine learning."* Information Retrieval, 3(2):127–163, 2000.
 
-Citeseer was originally published by Prithviraj Sen, Galileo Namata, Mustafa Bilgic, Lise Getoor, Brian Gallagher, and Tina Eliassi-Rad.
+The Citeseer graph was originally published by Prithviraj Sen, Galileo Namata, Mustafa Bilgic, Lise Getoor, Brian Gallagher, and Tina Eliassi-Rad.
 *"Collective Classification in Network Data."* AI Magazine, 29(3):93–106, 2008.
 
-PubMed was originally published by Galileo Namata, Ben London, Lise Getoor, and Bert Huang. *"Query-driven Active Surveying for Collective Classification"*.  International Workshop on Mining and Learning with Graphs (MLG) 2012.
+The PubMed graph was originally published by Galileo Namata, Ben London, Lise Getoor, and Bert Huang. *"Query-driven Active Surveying for Collective Classification"*.  International Workshop on Mining and Learning with Graphs (MLG) 2012.
 
-MS Academic was originally published by Oleksandr Shchur, Maximilian Mumme, Aleksandar Bojchevski, Stephan Günnemann. *"Pitfalls of Graph Neural Network Evaluation"*. Relational Representation Learning Workshop (R2L 2018), NeurIPS 2018.
+The Microsoft Academic graph was originally published by Oleksandr Shchur, Maximilian Mumme, Aleksandar Bojchevski, Stephan Günnemann. *"Pitfalls of Graph Neural Network Evaluation"*. Relational Representation Learning Workshop (R2L), NeurIPS 2018.
 
 ## Contact
 Please contact klicpera@in.tum.de in case you have any questions.
@@ -42,7 +42,7 @@ Please cite our paper if you use the model or this code in your own work:
 ```
 @inproceedings{klicpera_combining_2019,
 	title = {Combining Neural Networks with Personalized PageRank for Classification on Graphs},
-	author = {Klicpera, Johannes and Bojchevski, Aleksandar and Günnemann, Stephan},
+	author = {Klicpera, Johannes and Bojchevski, Aleksandar and G{\"u}nnemann, Stephan},
 	booktitle={International Conference on Learning Representations (ICLR)},
 	year = {2019}
 }
