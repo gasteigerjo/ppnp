@@ -6,7 +6,7 @@
 
 Implementation of the model proposed in the paper:
 
-**[Predict then Propagate: Graph Neural Networks meet Personalized PageRank](https://arxiv.org/abs/1810.05997)**   
+**[Predict then Propagate: Graph Neural Networks meet Personalized PageRank](https://www.kdd.in.tum.de/ppnp)**   
 by Johannes Klicpera, Aleksandar Bojchevski, Stephan Günnemann   
 Published at ICLR 2019.
 
