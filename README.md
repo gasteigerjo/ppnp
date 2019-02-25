@@ -15,7 +15,7 @@ Install the reqirements via
 `pip install -r requirements.txt`
 
 ## Run the code
-The easiest way to get started is by looking at the notebook `simple_example.ipynb`.
+The easiest way to get started is by looking at the notebook `simple_example.ipynb`. The notebook `reproduce_results.ipynb` shows how to reproduce the results from the paper.
 
 ## Installation
 To install the package, run `python setup.py install`.
