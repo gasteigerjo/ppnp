@@ -122,15 +122,13 @@ def train_model(
     valtest_accuracy, valtest_f1_score = sess.run(
             [model.accuracy, model.f1_score],
             feed_dict=valtest_inputs)
-    if test:
-        logging.info("Test accuracy: {:.1f}%, test F1 score: {:.3f}"
-                     .format(valtest_accuracy * 100, valtest_f1_score))
-    else:
-        logging.info("Validation accuracy: {:.1f}%, val F1 score: {:.3f}"
-                     .format(valtest_accuracy * 100, valtest_f1_score))
 
-    conf_mat = model.calc_confusion_matrix()
-    logging.info('\n{}'.format(conf_mat))
+    valtest_name = 'Test' if test else 'Validation'
+    logging.info("{} accuracy: {:.1f}%, test F1 score: {:.3f}"
+                 .format(valtest_name, valtest_accuracy * 100, valtest_f1_score))
+
+    conf_mat = model.calc_confusion_matrix(valtest_idx)
+    logging.info('{} confusion matrix:\n{}'.format(valtest_name, conf_mat))
 
     if save_result:
         conf_mat.to_csv(os.path.join(log_dir, 'confusion_matrix.csv'))

@@ -20,18 +20,12 @@ class Model:
         self.reg_vars = []
         self.step = tf.train.create_global_step()
 
-    def _calc_cross_entropy(self, softmax=True):
+    def _calc_cross_entropy(self):
         logits_subset = tf.gather(self.logits, self.idx, axis=0)
         labels_subset = tf.gather(self.labels, self.idx, axis=0)
-        if softmax:
-            cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(
-                    labels=labels_subset, logits=logits_subset,
-                    name='cross_entropy')
-        else:
-            idx = (tf.range(0, tf.shape(labels_subset)[0]) * self.nclasses
-                   + labels_subset)
-            logits_overlap = tf.gather(tf.reshape(logits_subset, [-1]), idx)
-            cross_entropy = -tf.log(logits_overlap)
+        cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(
+                labels=labels_subset, logits=logits_subset,
+                name='cross_entropy')
         cross_entropy_mean = tf.reduce_mean(cross_entropy)
         tf.summary.scalar('cross_entropy_mean', cross_entropy_mean)
         return cross_entropy_mean
@@ -73,9 +67,9 @@ class Model:
             tf.summary.scalar('F1_score', f1_score)
         return f1_score, accuracy
 
-    def _build_loss(self, reg_lambda, softmax=True):
+    def _build_loss(self, reg_lambda):
         with tf.variable_scope('Loss'):
-            cross_entropy_mean = self._calc_cross_entropy(softmax)
+            cross_entropy_mean = self._calc_cross_entropy()
             l2_reg = tf.add_n([
                     tf.nn.l2_loss(weight) for weight in self.reg_vars])
             self.loss = cross_entropy_mean + reg_lambda * l2_reg
@@ -105,13 +99,13 @@ class Model:
                 for i, var in enumerate(tf.trainable_variables())]
         self.sess.run(set_all)
 
-    def calc_confusion_matrix(self):
+    def calc_confusion_matrix(self, idx):
         inputs = {
-                self.idx: np.arange(self.nnodes),
+                self.idx: idx,
                 self.isTrain: False}
         curr_predictions = self.sess.run(self.predictions, feed_dict=inputs)
         return pd.crosstab(
-                curr_predictions, self.labels_np,
+                curr_predictions[idx], self.labels_np[idx],
                 rownames=['Predictions'], colnames=['Labels'])
 
     def get_logits(self):
