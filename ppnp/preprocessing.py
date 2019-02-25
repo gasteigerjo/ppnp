@@ -1,19 +1,21 @@
+from typing import List, Tuple, Dict
 import copy
 import numpy as np
 
 
-def gen_seeds(size=None):
+def gen_seeds(size: int = None) -> np.ndarray:
     max_uint32 = np.iinfo(np.uint32).max
     return np.random.randint(
             max_uint32 + 1, size=size, dtype=np.uint32)
 
 
-def exclude_idx(idx: np.array, idx_exclude_list):
+def exclude_idx(idx: np.ndarray, idx_exclude_list: List[np.ndarray]) -> np.ndarray:
     idx_exclude = np.concatenate(idx_exclude_list)
     return np.array([i for i in idx if i not in idx_exclude])
 
 
-def known_unknown_split(idx, nknown=1500, seed=4143496719):
+def known_unknown_split(
+        idx: np.ndarray, nknown: int = 1500, seed: int = 4143496719) -> Tuple[np.ndarray, np.ndarray]:
     rnd_state = np.random.RandomState(seed)
     known_idx = rnd_state.choice(idx, nknown, replace=False)
     unknown_idx = exclude_idx(idx, [known_idx])
@@ -21,7 +23,8 @@ def known_unknown_split(idx, nknown=1500, seed=4143496719):
 
 
 def train_stopping_split(
-        idx, labels, ntrain_per_class=20, nstopping=500, seed=2413340114):
+        idx: np.ndarray, labels: np.ndarray, ntrain_per_class: int = 20,
+        nstopping: int = 500, seed: int = 2413340114) -> Tuple[np.ndarray, np.ndarray]:
     rnd_state = np.random.RandomState(seed)
     train_idx_split = []
     for i in range(max(labels) + 1):
@@ -34,7 +37,9 @@ def train_stopping_split(
     return train_idx, stopping_idx
 
 
-def gen_splits(labels, idx_split_args, test=False):
+def gen_splits(
+        labels: np.ndarray, idx_split_args: Dict[str, int],
+        test: bool = False) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     all_idx = np.arange(len(labels))
     known_idx, unknown_idx = known_unknown_split(
             all_idx, idx_split_args['nknown'])

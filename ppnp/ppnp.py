@@ -13,7 +13,7 @@ class PPNP(Model):
     def _build_layer(
             self, X: Union[tf.Tensor, tf.SparseTensor], out_size: int,
             activation: Callable[[tf.Tensor, str], tf.Tensor],
-            regularize: bool = True, keep_prob: float = 0.5):
+            regularize: bool = True, keep_prob: float = 0.5) -> tf.Tensor:
         W = tf.get_variable(
                 'weights',
                 [X.get_shape()[1], out_size],

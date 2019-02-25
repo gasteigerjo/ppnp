@@ -16,7 +16,7 @@ def train_model(
         idx_split_args: dict = {'ntrain_per_class': 20, 'nstopping': 500, 'nknown': 1500, 'seed': 2413340114},
         stopping_args: dict = stopping_args,
         test: bool = False, save_result: bool = False,
-        tf_seed: int = None, print_interval: int = 20):
+        tf_seed: int = None, print_interval: int = 20) -> dict:
     labels = graph.labels
     train_idx, stopping_idx, valtest_idx = gen_splits(
             labels, idx_split_args, test=test)
@@ -68,7 +68,6 @@ def train_model(
     last_time = start_time
     for step in range(early_stopping.max_steps):
 
-        model.update_train_op(step)
         _, train_loss = sess.run(
                 [model.train_op, model.loss],
                 feed_dict=train_inputs)

@@ -1,9 +1,10 @@
+from typing import Union
 import numpy as np
 import scipy.sparse as sp
 import tensorflow as tf
 
 
-def sparse_matrix_to_tensor(X):
+def sparse_matrix_to_tensor(X: sp.spmatrix) -> tf.SparseTensor:
     coo = X.tocoo()
     indices = np.mat([coo.row, coo.col]).transpose()
     return tf.SparseTensor(
@@ -12,35 +13,38 @@ def sparse_matrix_to_tensor(X):
             coo.shape)
 
 
-def matrix_to_tensor(X):
+def matrix_to_tensor(
+        X: Union[np.ndarray, sp.spmatrix]) -> Union[tf.Tensor, tf.SparseTensor]:
     if sp.issparse(X):
         return sparse_matrix_to_tensor(X)
     else:
         return tf.constant(X, dtype=tf.float32)
 
 
-def sparse_dropout(X, keep_prob):
+def sparse_dropout(X: tf.SparseTensor, keep_prob: float) -> tf.SparseTensor:
     X_drop_val = tf.nn.dropout(X.values, keep_prob)
     return tf.SparseTensor(X.indices, X_drop_val, X.dense_shape)
 
 
-def mixed_dropout(X, keep_prob):
+def mixed_dropout(
+        X: Union[tf.Tensor, tf.SparseTensor],
+        keep_prob: float) -> Union[tf.Tensor, tf.SparseTensor]:
     if isinstance(X, tf.SparseTensor):
         return sparse_dropout(X, keep_prob)
     else:
         return tf.nn.dropout(X, keep_prob)
 
 
-def softmax(logits, axis=-1):
+def softmax(logits: np.ndarray, axis: int = -1) -> np.ndarray:
     after_exp = np.exp(logits - np.max(logits, axis=axis, keepdims=True))
     return after_exp / np.sum(after_exp, axis=axis, keepdims=True)
 
 
-def get_accuracy(predictions: np.array, labels: np.array):
+def get_accuracy(predictions: np.ndarray, labels: np.ndarray) -> np.floating:
     return np.mean(predictions == labels)
 
 
-def get_f1(predictions: np.array, labels: np.array):
+def get_f1(predictions: np.ndarray, labels: np.ndarray) -> np.floating:
     nclasses = np.max(labels) + 1
     avg_precision = 0
     avg_recall = 0

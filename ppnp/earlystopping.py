@@ -1,7 +1,10 @@
+from typing import List
 import copy
 import operator
 from enum import Enum, auto
 import numpy as np
+
+from .model import Model
 
 
 class StopVariable(Enum):
@@ -16,10 +19,15 @@ class Best(Enum):
     ALL = auto()
 
 
+stopping_args = dict(
+        stop_varnames=[StopVariable.ACCURACY, StopVariable.LOSS],
+        patience=100, max_steps=10000, remember=Best.RANKED)
+
+
 class EarlyStopping:
     def __init__(
-            self, model, stop_varnames, patience=10,
-            max_steps=200, remember=Best.ALL):
+            self, model: Model, stop_varnames: List[StopVariable],
+            patience: int = 10, max_steps: int = 200, remember: Best = Best.ALL):
         self.model = model
         self.comp_ops = []
         self.stop_vars = []
@@ -45,7 +53,7 @@ class EarlyStopping:
         self.best_step = None
         self.best_trainables = None
 
-    def check(self, values, step):
+    def check(self, values: List[np.floating], step: int) -> bool:
         checks = [self.comp_ops[i](val, self.best_vals[i])
                   for i, val in enumerate(values)]
         if any(checks):
@@ -73,8 +81,3 @@ class EarlyStopping:
         else:
             self.patience -= 1
         return self.patience == 0
-
-
-stopping_args = dict(
-        stop_varnames=[StopVariable.ACCURACY, StopVariable.LOSS],
-        patience=100, max_steps=10000, remember=Best.RANKED)
