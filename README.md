@@ -6,7 +6,7 @@
 
 Implementation of the model proposed in the paper:
 
-**[Combining Neural Networks with Personalized PageRank for Classification on Graphs](https://arxiv.org/abs/1810.05997)**   
+**[Predict then Propagate: Graph Neural Networks meet Personalized PageRank](https://www.kdd.in.tum.de/ppnp)**   
 by Johannes Klicpera, Aleksandar Bojchevski, Stephan Günnemann   
 Published at ICLR 2019.
 
@@ -40,8 +40,8 @@ Please contact klicpera@in.tum.de in case you have any questions.
 Please cite our paper if you use the model or this code in your own work:
 
 ```
-@inproceedings{klicpera_combining_2019,
-	title = {Combining Neural Networks with Personalized PageRank for Classification on Graphs},
+@inproceedings{klicpera_predict_2019,
+	title = {Predict then Propagate: Graph Neural Networks meet Personalized PageRank},
 	author = {Klicpera, Johannes and Bojchevski, Aleksandar and G{\"u}nnemann, Stephan},
 	booktitle={International Conference on Learning Representations (ICLR)},
 	year = {2019}
