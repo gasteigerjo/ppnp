@@ -107,21 +107,8 @@ class Model:
                 curr_predictions[idx], self.labels_np[idx],
                 rownames=['Predictions'], colnames=['Labels'])
 
-    def get_logits(self) -> np.ndarray:
-        inputs = {
-                self.idx: np.arange(self.nnodes),
-                self.isTrain: False}
-        return self.sess.run(self.logits, feed_dict=inputs)
-
     def get_predictions(self) -> np.ndarray:
         inputs = {
                 self.idx: np.arange(self.nnodes),
                 self.isTrain: False}
         return self.sess.run(self.predictions, feed_dict=inputs)
-
-    def get_hidden_activations(self) -> List[np.ndarray]:
-        if hasattr(self, 'Zs'):
-            inputs = {
-                    self.idx: np.arange(self.nnodes),
-                    self.isTrain: False}
-            return self.sess.run(self.Zs, feed_dict=inputs)

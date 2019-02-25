@@ -6,7 +6,6 @@ import tensorflow as tf
 
 from .data.sparsegraph import SparseGraph
 from .model import Model
-from .utils import softmax
 from .preprocessing import gen_splits, gen_seeds
 from .earlystopping import EarlyStopping, stopping_args
 
@@ -143,10 +142,7 @@ def train_model(
         valtest_writer.flush()
 
     result = {}
-    result['logits'] = model.get_logits()
-    result['probabilities'] = softmax(result['logits'])
     result['predictions'] = model.get_predictions()
-    result['hidden_activations'] = model.get_hidden_activations()
     result['vars'] = early_stopping.best_trainables
     result['train'] = {'accuracy': train_accuracy, 'f1_score': train_f1_score}
     result['early_stopping'] = {'accuracy': stopping_accuracy, 'f1_score': stopping_f1_score}

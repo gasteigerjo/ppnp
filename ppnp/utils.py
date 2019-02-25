@@ -33,37 +33,3 @@ def mixed_dropout(
         return sparse_dropout(X, keep_prob)
     else:
         return tf.nn.dropout(X, keep_prob)
-
-
-def softmax(logits: np.ndarray, axis: int = -1) -> np.ndarray:
-    after_exp = np.exp(logits - np.max(logits, axis=axis, keepdims=True))
-    return after_exp / np.sum(after_exp, axis=axis, keepdims=True)
-
-
-def get_accuracy(predictions: np.ndarray, labels: np.ndarray) -> np.floating:
-    return np.mean(predictions == labels)
-
-
-def get_f1(predictions: np.ndarray, labels: np.ndarray) -> np.floating:
-    nclasses = np.max(labels) + 1
-    avg_precision = 0
-    avg_recall = 0
-    for i in range(nclasses):
-        pred_is_i = predictions == i
-        label_is_i = labels == i
-        true_pos = np.sum(pred_is_i & label_is_i)
-        false_pos = np.sum(pred_is_i & ~label_is_i)
-        false_neg = np.sum(~pred_is_i & label_is_i)
-        if false_pos == 0:
-            avg_precision += 1.
-        else:
-            avg_precision += true_pos / (true_pos + false_pos)
-        if false_neg == 0:
-            avg_recall += 1.
-        else:
-            avg_recall += true_pos / (true_pos + false_neg)
-    avg_precision /= nclasses
-    avg_recall /= nclasses
-    f1_score = (
-            2 * (avg_precision * avg_recall) / (avg_precision + avg_recall))
-    return f1_score
