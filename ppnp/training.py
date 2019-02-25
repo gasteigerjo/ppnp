@@ -23,7 +23,7 @@ def train_model(
 
     logging.info(f"{model_class.__name__}: {build_args}")
     tf.reset_default_graph()
-    if tf_seed is not None:
+    if tf_seed is None:
         tf_seed = gen_seeds()
     tf.set_random_seed(tf_seed)
     logging.info(f"Tensorflow seed: {tf_seed}")
