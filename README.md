@@ -21,7 +21,7 @@ The easiest way to get started is by looking at the notebook `simple_example_ten
 To install the package, run `python setup.py install`.
 
 ## Datasets
-In the `data` folder you can find several datasets.
+In the `data` folder you can find several datasets. If you want to use other (external) datasets, you can e.g. use the `networkx_to_sparsegraph` method in `ppnp.data.io` for converting NetworkX graphs to our SparseGraph format.
 
 The Cora-ML graph was extracted by Aleksandar Bojchevski, and Stephan Günnemann. *"Deep gaussian embedding of attributed graphs: Unsupervised inductive learning via ranking."* ICLR 2018,   
 while the raw data was originally published by Andrew Kachites McCallum, Kamal Nigam, Jason Rennie, and Kristie Seymore. *"Automating the construction of internet portals with machine learning."* Information Retrieval, 3(2):127–163, 2000.
