@@ -4,7 +4,7 @@
 <img src="https://raw.githubusercontent.com/klicperajo/ppnp/master/ppnp_model.svg?sanitize=true" width="600">
 </p>
 
-Implementation of the model proposed in the paper:
+TensorFlow and PyTorch implementations of the model proposed in the paper:
 
 **[Predict then Propagate: Graph Neural Networks meet Personalized PageRank](https://www.kdd.in.tum.de/ppnp)**   
 by Johannes Klicpera, Aleksandar Bojchevski, Stephan Günnemann   
@@ -15,7 +15,7 @@ Install the reqirements via
 `pip install -r requirements.txt`
 
 ## Run the code
-The easiest way to get started is by looking at the notebook `simple_example.ipynb`. The notebook `reproduce_results.ipynb` shows how to reproduce the results from the paper.
+The easiest way to get started is by looking at the notebook `simple_example_tensorflow.ipynb` or `simple_example_pytorch.ipynb`. The notebook `reproduce_results.ipynb` shows how to reproduce the results from the paper.
 
 ## Installation
 To install the package, run `python setup.py install`.

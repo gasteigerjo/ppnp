@@ -4,9 +4,9 @@ import os
 import logging
 import tensorflow as tf
 
-from .data.sparsegraph import SparseGraph
+from ..data.sparsegraph import SparseGraph
 from .model import Model
-from .preprocessing import gen_splits, gen_seeds
+from ..preprocessing import gen_splits, gen_seeds
 from .earlystopping import EarlyStopping, stopping_args
 
 
@@ -20,12 +20,12 @@ def train_model(
     train_idx, stopping_idx, valtest_idx = gen_splits(
             labels, idx_split_args, test=test)
 
-    logging.info(f"{model_class.__name__}: {build_args}")
+    logging.log(21, f"{model_class.__name__}: {build_args}")
     tf.reset_default_graph()
     if tf_seed is None:
         tf_seed = gen_seeds()
     tf.set_random_seed(tf_seed)
-    logging.info(f"Tensorflow seed: {tf_seed}")
+    logging.log(22, f"Tensorflow seed: {tf_seed}")
     sess = tf.Session(
             config=tf.ConfigProto(gpu_options=tf.GPUOptions(allow_growth=True)))
     model = model_class(graph.attr_matrix, labels, sess)
@@ -101,10 +101,10 @@ def train_model(
     runtime_perepoch = runtime / (step + 1)
 
     if len(early_stopping.stop_vars) == 0:
-        logging.info("Last step: {} ({:.3f} sec)".format(step, runtime))
+        logging.log(22, "Last step: {} ({:.3f} sec)".format(step, runtime))
     else:
-        logging.info("Last step: {}, best step: {} ({:.3f} sec)"
-                     .format(step, early_stopping.best_step, runtime))
+        logging.log(22, "Last step: {}, best step: {} ({:.3f} sec)"
+                    .format(step, early_stopping.best_step, runtime))
         model.set_vars(early_stopping.best_trainables)
 
     train_accuracy, train_f1_score = sess.run(
@@ -114,16 +114,16 @@ def train_model(
     stopping_accuracy, stopping_f1_score = sess.run(
             [model.accuracy, model.f1_score],
             feed_dict=stopping_inputs)
-    logging.info("Early stopping accuracy: {:.1f}%, early stopping F1 score: {:.3f}"
-                 .format(stopping_accuracy * 100, stopping_f1_score))
+    logging.log(21, "Early stopping accuracy: {:.1f}%, early stopping F1 score: {:.3f}"
+                .format(stopping_accuracy * 100, stopping_f1_score))
 
     valtest_accuracy, valtest_f1_score = sess.run(
             [model.accuracy, model.f1_score],
             feed_dict=valtest_inputs)
 
     valtest_name = 'Test' if test else 'Validation'
-    logging.info("{} accuracy: {:.1f}%, test F1 score: {:.3f}"
-                 .format(valtest_name, valtest_accuracy * 100, valtest_f1_score))
+    logging.log(22, "{} accuracy: {:.1f}%, test F1 score: {:.3f}"
+                .format(valtest_name, valtest_accuracy * 100, valtest_f1_score))
 
     conf_mat = model.calc_confusion_matrix(valtest_idx)
     logging.info('{} confusion matrix:\n{}'.format(valtest_name, conf_mat))
