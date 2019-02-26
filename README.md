@@ -13,6 +13,20 @@ Published at ICLR 2019.
 ## Run the code
 The easiest way to get started is by looking at the notebook `simple_example_tensorflow.ipynb` or `simple_example_pytorch.ipynb`. The notebook `reproduce_results.ipynb` shows how to reproduce the results from the paper.
 
+## Requirements
+The repository uses these packages:
+
+```
+numpy
+scipy
+pandas
+networkx
+tensorflow
+pytorch
+```
+
+You can install all requirements via `pip install -r requirements.txt`. However, depending on which parts of the repository you use (TensorFlow or PyTorch implementation, NetworkX conversion) you don't need all of these.
+
 ## Installation
 To install the package, run `python setup.py install`.
 
@@ -28,20 +42,6 @@ The Citeseer graph was originally published by Prithviraj Sen, Galileo Namata, M
 The PubMed graph was originally published by Galileo Namata, Ben London, Lise Getoor, and Bert Huang. *"Query-driven Active Surveying for Collective Classification"*.  International Workshop on Mining and Learning with Graphs (MLG) 2012.
 
 The Microsoft Academic graph was originally published by Oleksandr Shchur, Maximilian Mumme, Aleksandar Bojchevski, Stephan Günnemann. *"Pitfalls of Graph Neural Network Evaluation"*. Relational Representation Learning Workshop (R2L), NeurIPS 2018.
-
-## Requirements
-The repository uses these packages:
-
-```
-numpy
-scipy
-pandas
-networkx
-tensorflow
-pytorch
-```
-
-Install all requirements via `pip install -r requirements.txt`. However, depending on which parts of the repository you use (e.g. TensorFlow or PyTorch implementation) you don't need all of these.
 
 ## Contact
 Please contact klicpera@in.tum.de in case you have any questions.
