@@ -10,10 +10,6 @@ TensorFlow and PyTorch implementations of the model proposed in the paper:
 by Johannes Klicpera, Aleksandar Bojchevski, Stephan Günnemann   
 Published at ICLR 2019.
 
-## Requirements
-Install the reqirements via
-`pip install -r requirements.txt`
-
 ## Run the code
 The easiest way to get started is by looking at the notebook `simple_example_tensorflow.ipynb` or `simple_example_pytorch.ipynb`. The notebook `reproduce_results.ipynb` shows how to reproduce the results from the paper.
 
@@ -45,7 +41,7 @@ tensorflow
 pytorch
 ```
 
-However, depending on which parts of the repository you use (e.g. TensorFlow or PyTorch implementation) you don't need all of these.
+Install all requirements via `pip install -r requirements.txt`. However, depending on which parts of the repository you use (e.g. TensorFlow or PyTorch implementation) you don't need all of these.
 
 ## Contact
 Please contact klicpera@in.tum.de in case you have any questions.
