@@ -33,6 +33,20 @@ The PubMed graph was originally published by Galileo Namata, Ben London, Lise Ge
 
 The Microsoft Academic graph was originally published by Oleksandr Shchur, Maximilian Mumme, Aleksandar Bojchevski, Stephan Günnemann. *"Pitfalls of Graph Neural Network Evaluation"*. Relational Representation Learning Workshop (R2L), NeurIPS 2018.
 
+## Requirements
+The repository uses these packages:
+
+```
+numpy
+scipy
+pandas
+networkx
+tensorflow
+pytorch
+```
+
+However, depending on which parts of the repository you use (e.g. TensorFlow or PyTorch implementation) you don't need all of these.
+
 ## Contact
 Please contact klicpera@in.tum.de in case you have any questions.
 
