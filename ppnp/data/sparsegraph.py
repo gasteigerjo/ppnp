@@ -136,12 +136,13 @@ class SparseGraph:
         dup_idx = np.unravel_index(dup_ridx, self.adj_matrix.shape)
 
         # Check if the adjacency matrix weights are symmetric (if nonzero)
-        if not np.allclose(self.adj_matrix[dup_idx], self.adj_matrix[dup_idx[::-1]]):
+        if len(dup_ridx) > 0 and not np.allclose(self.adj_matrix[dup_idx], self.adj_matrix[dup_idx[::-1]]):
             raise ValueError("Adjacency matrix weights of opposing edges differ.")
 
         # Create symmetric matrix
         new_adj_matrix = self.adj_matrix + self.adj_matrix.T
-        new_adj_matrix[dup_idx] -= self.adj_matrix[dup_idx]
+        if len(dup_ridx) > 0:
+            new_adj_matrix[dup_idx] -= self.adj_matrix[dup_idx]
 
         self.adj_matrix = new_adj_matrix
         return self
