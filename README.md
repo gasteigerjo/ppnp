@@ -10,12 +10,22 @@ TensorFlow and PyTorch implementations of the model proposed in the paper:
 by Johannes Klicpera, Aleksandar Bojchevski, Stephan Günnemann   
 Published at ICLR 2019.
 
-## Requirements
-Install the reqirements via
-`pip install -r requirements.txt`
-
 ## Run the code
 The easiest way to get started is by looking at the notebook `simple_example_tensorflow.ipynb` or `simple_example_pytorch.ipynb`. The notebook `reproduce_results.ipynb` shows how to reproduce the results from the paper.
+
+## Requirements
+The repository uses these packages:
+
+```
+numpy
+scipy
+tensorflow
+pytorch
+```
+
+You can install all requirements via `pip install -r requirements.txt`.
+However, in practice you will only need either TensorFlow or PyTorch, depending on which implementation you use.
+If you use the `networkx_to_sparsegraph` method for importing other datasets you will additionally need NetworkX.
 
 ## Installation
 To install the package, run `python setup.py install`.
@@ -32,19 +42,6 @@ The Citeseer graph was originally published by Prithviraj Sen, Galileo Namata, M
 The PubMed graph was originally published by Galileo Namata, Ben London, Lise Getoor, and Bert Huang. *"Query-driven Active Surveying for Collective Classification"*.  International Workshop on Mining and Learning with Graphs (MLG) 2012.
 
 The Microsoft Academic graph was originally published by Oleksandr Shchur, Maximilian Mumme, Aleksandar Bojchevski, Stephan Günnemann. *"Pitfalls of Graph Neural Network Evaluation"*. Relational Representation Learning Workshop (R2L), NeurIPS 2018.
-
-## Requirements
-The repository uses these packages:
-
-```
-numpy
-scipy
-tensorflow
-pytorch
-```
-
-However, in practice you will only need either TensorFlow or PyTorch, depending on which implementation you use.
-If you use the `networkx_to_sparsegraph` method for importing other datasets you will additionally need NetworkX.
 
 ## Contact
 Please contact klicpera@in.tum.de in case you have any questions.
