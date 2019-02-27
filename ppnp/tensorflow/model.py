@@ -1,7 +1,6 @@
 from typing import Union, Tuple, List
 import numpy as np
 import tensorflow as tf
-import pandas as pd
 import scipy.sparse as sp
 
 from .utils import matrix_to_tensor
@@ -97,15 +96,6 @@ class Model:
                 var.assign(new_vars[i])
                 for i, var in enumerate(tf.trainable_variables())]
         self.sess.run(set_all)
-
-    def calc_confusion_matrix(self, idx: np.ndarray) -> pd.DataFrame:
-        inputs = {
-                self.idx: idx,
-                self.isTrain: False}
-        curr_predictions = self.sess.run(self.predictions, feed_dict=inputs)
-        return pd.crosstab(
-                curr_predictions[idx], self.labels_np[idx],
-                rownames=['Predictions'], colnames=['Labels'])
 
     def get_predictions(self) -> np.ndarray:
         inputs = {

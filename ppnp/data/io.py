@@ -3,7 +3,6 @@ from typing import Union
 from pathlib import Path
 import numpy as np
 import scipy.sparse as sp
-import networkx as nx
 
 from .sparsegraph import SparseGraph
 
@@ -60,7 +59,7 @@ def load_dataset(name: str,
 
 
 def networkx_to_sparsegraph(
-        nx_graph: Union[nx.Graph, nx.DiGraph],
+        nx_graph: Union['nx.Graph', 'nx.DiGraph'],
         label_name: str = None,
         sparse_node_attrs: bool = True,
         sparse_edge_attrs: bool = True
@@ -85,6 +84,8 @@ def networkx_to_sparsegraph(
         Converted graph.
 
     """
+    import networkx as nx
+
     # Extract node names
     int_names = True
     for node in nx_graph.nodes:

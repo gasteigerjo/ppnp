@@ -39,13 +39,12 @@ The repository uses these packages:
 ```
 numpy
 scipy
-pandas
-networkx
 tensorflow
 pytorch
 ```
 
-However, depending on which parts of the repository you use (e.g. TensorFlow or PyTorch implementation) you don't need all of these.
+However, in practice you will only need either TensorFlow or PyTorch, depending on which implementation you use.
+If you use the `networkx_to_sparsegraph` method for importing other datasets you will additionally need NetworkX.
 
 ## Contact
 Please contact klicpera@in.tum.de in case you have any questions.
