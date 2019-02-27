@@ -1,7 +1,6 @@
 from typing import Type
 import time
 import logging
-import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -64,7 +63,7 @@ def train_model(
             if phase == 'train':
                 model.train()  # Set model to training mode
             else:
-                model.eval()   # Set model to evaluate mode
+                model.eval()  # Set model to evaluate mode
 
             running_loss = 0
             running_corrects = 0
@@ -73,34 +72,30 @@ def train_model(
                 idx = idx.to(device)
                 labels = labels.to(device)
 
-                # zero the parameter gradients
                 optimizer.zero_grad()
 
-                # forward
-                # track history if only in train
                 with torch.set_grad_enabled(phase == 'train'):
-                    log_preds, _ = model(attr_matrix, idx)
+                    log_preds = model(attr_matrix, idx)
                     preds = torch.argmax(log_preds, dim=1)
 
+                    # Calculate loss
                     cross_entropy_mean = F.nll_loss(log_preds, labels)
                     l2_reg = sum((torch.sum(param ** 2) for param in model.reg_params))
                     loss = cross_entropy_mean + reg_lambda / 2 * l2_reg
 
-                    # backward + optimize only if in training phase
                     if phase == 'train':
                         loss.backward()
                         optimizer.step()
 
-                    # statistics
+                    # Collect statistics
                     running_loss += loss.item() * idx.size(0)
                     running_corrects += torch.sum(preds == labels)
 
-            # statistics
+            # Collect statistics
             epoch_stats[phase]['loss'] = running_loss / len(dataloaders[phase].dataset)
             epoch_stats[phase]['acc'] = running_corrects.item() / len(dataloaders[phase].dataset)
 
         if epoch % print_interval == 0:
-            #import pdb; pdb.set_trace()
             duration = time.time() - last_time
             last_time = time.time()
             logging.info(f"Epoch {epoch}: "
@@ -118,7 +113,7 @@ def train_model(
     runtime = time.time() - start_time
     logging.log(22, f"Last epoch: {epoch}, best epoch: {early_stopping.best_epoch} ({runtime:.3f} sec)")
 
-    # load best model weights
+    # Load best model weights
     model.load_state_dict(early_stopping.best_state)
 
     stopping_preds = get_predictions(model, attr_matrix, idx_all['stopping'])

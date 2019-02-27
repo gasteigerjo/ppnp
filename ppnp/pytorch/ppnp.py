@@ -37,4 +37,4 @@ class PPNP(nn.Module):
     def forward(self, attr_matrix: torch.sparse.FloatTensor, idx: torch.LongTensor):
         local_logits = self._transform_features(attr_matrix)
         final_logits = self.propagation(local_logits, idx)
-        return F.log_softmax(final_logits, dim=-1), local_logits
+        return F.log_softmax(final_logits, dim=-1)
