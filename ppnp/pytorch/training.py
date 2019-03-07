@@ -138,6 +138,6 @@ def get_predictions(model, attr_matrix, idx, batch_size=None):
     for idx, in dataloader:
         idx = idx.to(attr_matrix.device)
         with torch.set_grad_enabled(False):
-            log_preds, _ = model(attr_matrix, idx)
+            log_preds = model(attr_matrix, idx)
             preds.append(torch.argmax(log_preds, dim=1))
     return torch.cat(preds, dim=0).cpu().numpy()
