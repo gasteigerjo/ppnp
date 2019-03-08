@@ -4,13 +4,15 @@ import tensorflow as tf
 import scipy.sparse as sp
 
 from .utils import matrix_to_tensor
+from ..preprocessing import normalize_attributes
 
 
 class Model:
     def __init__(
             self, attr_matrix: Union[np.ndarray, sp.spmatrix],
             labels: np.ndarray, sess: tf.Session):
-        self.attr_matrix = matrix_to_tensor(attr_matrix)
+        attr_mat_norm = normalize_attributes(attr_matrix)
+        self.attr_mat_norm = matrix_to_tensor(attr_mat_norm)
         self.labels_np = labels
         self.labels = tf.constant(labels, dtype=tf.int32)
         self.sess = sess

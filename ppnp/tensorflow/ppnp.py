@@ -42,7 +42,7 @@ class PPNP(Model):
 
         keep_prob = tf.maximum(tf.cast(~self.isTrain, tf.float32), keep_prob)
 
-        self.Zs = [self.attr_matrix]
+        self.Zs = [self.attr_mat_norm]
         # Hidden layers
         for i, hiddenunit in enumerate(self.hiddenunits):
             with tf.variable_scope(f'layer_{i}'):

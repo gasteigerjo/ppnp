@@ -7,7 +7,7 @@ import torch.nn.functional as F
 from torch.utils.data import TensorDataset, DataLoader
 
 from ..data.sparsegraph import SparseGraph
-from ..preprocessing import gen_seeds, gen_splits
+from ..preprocessing import gen_seeds, gen_splits, normalize_attributes
 from .earlystopping import EarlyStopping, stopping_args
 from .utils import matrix_to_torch
 
@@ -51,7 +51,8 @@ def train_model(
 
     dataloaders = get_dataloaders(idx_all, labels_all)
     early_stopping = EarlyStopping(model, **stopping_args)
-    attr_matrix = matrix_to_torch(graph.attr_matrix).to(device)
+    attr_mat_norm_np = normalize_attributes(graph.attr_matrix)
+    attr_mat_norm = matrix_to_torch(attr_mat_norm_np).to(device)
 
     epoch_stats = {'train': {}, 'stopping': {}}
 
@@ -75,7 +76,7 @@ def train_model(
                 optimizer.zero_grad()
 
                 with torch.set_grad_enabled(phase == 'train'):
-                    log_preds = model(attr_matrix, idx)
+                    log_preds = model(attr_mat_norm, idx)
                     preds = torch.argmax(log_preds, dim=1)
 
                     # Calculate loss
@@ -116,11 +117,11 @@ def train_model(
     # Load best model weights
     model.load_state_dict(early_stopping.best_state)
 
-    stopping_preds = get_predictions(model, attr_matrix, idx_all['stopping'])
+    stopping_preds = get_predictions(model, attr_mat_norm, idx_all['stopping'])
     stopping_acc = (stopping_preds == labels_all[idx_all['stopping']]).mean()
     logging.log(21, f"Early stopping accuracy: {stopping_acc * 100:.1f}%")
 
-    valtest_preds = get_predictions(model, attr_matrix, idx_all['valtest'])
+    valtest_preds = get_predictions(model, attr_mat_norm, idx_all['valtest'])
     valtest_acc = (valtest_preds == labels_all[idx_all['valtest']]).mean()
     valtest_name = 'Test' if test else 'Validation'
     logging.log(22, f"{valtest_name} accuracy: {valtest_acc * 100:.1f}%")
