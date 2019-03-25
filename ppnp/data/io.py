@@ -71,7 +71,7 @@ def networkx_to_sparsegraph(
     Labels can be any object. If non-numeric they are interpreted as
     categorical and enumerated.
 
-    This ignores edge attributes.
+    This ignores all edge attributes except the edge weights.
 
     Parameters
     ----------
