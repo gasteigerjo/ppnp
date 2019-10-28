@@ -142,7 +142,7 @@ class SparseGraph:
         # Create symmetric matrix
         new_adj_matrix = self.adj_matrix + self.adj_matrix.T
         if len(dup_ridx) > 0:
-            new_adj_matrix[dup_idx] -= self.adj_matrix[dup_idx]
+            new_adj_matrix[dup_idx] = (new_adj_matrix[dup_idx] - self.adj_matrix[dup_idx]).A1
 
         self.adj_matrix = new_adj_matrix
         return self
