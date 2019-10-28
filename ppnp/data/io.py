@@ -23,7 +23,7 @@ def load_from_npz(file_name: str) -> SparseGraph:
         Graph in sparse matrix format.
 
     """
-    with np.load(file_name) as loader:
+    with np.load(file_name, allow_pickle=True) as loader:
         loader = dict(loader)
         dataset = SparseGraph.from_flat_dict(loader)
     return dataset
