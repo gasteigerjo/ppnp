@@ -20,7 +20,7 @@ The repository uses these packages:
 numpy
 scipy
 tensorflow>=1.6,<2.0
-pytorch>=1.0
+pytorch==1.0
 ```
 
 You can install all requirements via `pip install -r requirements.txt`.
