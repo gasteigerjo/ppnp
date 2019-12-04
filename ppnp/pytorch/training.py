@@ -1,4 +1,4 @@
-from typing import Type
+from typing import Type, Tuple
 import time
 import logging
 import torch
@@ -28,7 +28,7 @@ def train_model(
         idx_split_args: dict = {'ntrain_per_class': 20, 'nstopping': 500, 'nknown': 1500, 'seed': 2413340114},
         stopping_args: dict = stopping_args,
         test: bool = False, device: str = 'cuda',
-        torch_seed: int = None, print_interval: int = 10) -> nn.Module:
+        torch_seed: int = None, print_interval: int = 10) -> Tuple[nn.Module, dict]:
     labels_all = graph.labels
     idx_np = {}
     idx_np['train'], idx_np['stopping'], idx_np['valtest'] = gen_splits(
@@ -112,10 +112,14 @@ def train_model(
             if early_stopping.check(stop_vars, epoch):
                 break
     runtime = time.time() - start_time
+    runtime_perepoch = runtime / (epoch + 1)
     logging.log(22, f"Last epoch: {epoch}, best epoch: {early_stopping.best_epoch} ({runtime:.3f} sec)")
 
     # Load best model weights
     model.load_state_dict(early_stopping.best_state)
+
+    train_preds = get_predictions(model, attr_mat_norm, idx_all['train'])
+    train_acc = (train_preds == labels_all[idx_all['train']]).mean()
 
     stopping_preds = get_predictions(model, attr_mat_norm, idx_all['stopping'])
     stopping_acc = (stopping_preds == labels_all[idx_all['stopping']]).mean()
@@ -125,8 +129,16 @@ def train_model(
     valtest_acc = (valtest_preds == labels_all[idx_all['valtest']]).mean()
     valtest_name = 'Test' if test else 'Validation'
     logging.log(22, f"{valtest_name} accuracy: {valtest_acc * 100:.1f}%")
+    
+    result = {}
+    result['predictions'] = get_predictions(model, attr_mat_norm, torch.arange(len(labels_all)))
+    result['train'] = {'accuracy': train_acc}
+    result['early_stopping'] = {'accuracy': stopping_acc}
+    result['valtest'] = {'accuracy': valtest_acc}
+    result['runtime'] = runtime
+    result['runtime_perepoch'] = runtime_perepoch
 
-    return model
+    return model, result
 
 
 def get_predictions(model, attr_matrix, idx, batch_size=None):
