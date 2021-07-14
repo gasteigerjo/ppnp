@@ -126,8 +126,6 @@ def train_model(
                 .format(valtest_name, valtest_accuracy * 100, valtest_f1_score))
 
     if save_result:
-        conf_mat.to_csv(os.path.join(log_dir, 'confusion_matrix.csv'))
-
         if len(early_stopping.stop_vars) == 0:
             checkpoint_saver.save(sess, checkpoint_file, global_step=step)
         else:
