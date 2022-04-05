@@ -1,14 +1,16 @@
 # PPNP and APPNP
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/klicperajo/ppnp/master/ppnp_model.svg?sanitize=true" width="600">
+<img src="https://raw.githubusercontent.com/gasteigerjo/ppnp/master/ppnp_model.svg?sanitize=true" width="600">
 </p>
 
 TensorFlow and PyTorch implementations of the model proposed in the paper:
 
-**[Predict then Propagate: Graph Neural Networks meet Personalized PageRank](https://www.kdd.in.tum.de/ppnp)**   
-by Johannes Klicpera, Aleksandar Bojchevski, Stephan Günnemann   
+**[Predict then Propagate: Graph Neural Networks meet Personalized PageRank](https://www.daml.in.tum.de/ppnp)**   
+by Johannes Gasteiger, Aleksandar Bojchevski, Stephan Günnemann   
 Published at ICLR 2019.
+
+Note that the author's name has changed from Johannes Klicpera to Johannes Gasteiger.
 
 ## Run the code
 The easiest way to get started is by looking at the notebook `simple_example_tensorflow.ipynb` or `simple_example_pytorch.ipynb`. The notebook `reproduce_results.ipynb` shows how to reproduce the results from the paper.
@@ -44,15 +46,15 @@ The PubMed graph was originally published by Galileo Namata, Ben London, Lise Ge
 The Microsoft Academic graph was originally published by Oleksandr Shchur, Maximilian Mumme, Aleksandar Bojchevski, Stephan Günnemann. *"Pitfalls of Graph Neural Network Evaluation"*. Relational Representation Learning Workshop (R2L), NeurIPS 2018.
 
 ## Contact
-Please contact klicpera@in.tum.de in case you have any questions.
+Please contact j.gasteiger@in.tum.de in case you have any questions.
 
 ## Cite
 Please cite our paper if you use the model or this code in your own work:
 
 ```
-@inproceedings{klicpera_predict_2019,
+@inproceedings{gasteiger_predict_2019,
 	title = {Predict then Propagate: Graph Neural Networks meet Personalized PageRank},
-	author = {Klicpera, Johannes and Bojchevski, Aleksandar and G{\"u}nnemann, Stephan},
+	author = {Gasteiger, Johannes and Bojchevski, Aleksandar and G{\"u}nnemann, Stephan},
 	booktitle={International Conference on Learning Representations (ICLR)},
 	year = {2019}
 }
