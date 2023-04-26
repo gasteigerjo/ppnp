@@ -6,7 +6,7 @@
 
 TensorFlow and PyTorch implementations of the model proposed in the paper:
 
-**[Predict then Propagate: Graph Neural Networks meet Personalized PageRank](https://www.daml.in.tum.de/ppnp)**   
+**[Predict then Propagate: Graph Neural Networks meet Personalized PageRank](https://www.cs.cit.tum.de/daml/ppnp/)**   
 by Johannes Gasteiger, Aleksandar Bojchevski, Stephan Günnemann   
 Published at ICLR 2019.
 
