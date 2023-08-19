@@ -157,12 +157,12 @@ def networkx_to_sparsegraph(
         class_names = None
     else:
         try:
-            labels = np.array(labels, dtype=np.float32)
+            labels = np.array(labels, dtype=np.int32)
             class_names = None
         except ValueError:
             class_names = np.unique(labels)
             class_mapping = {k: i for i, k in enumerate(class_names)}
-            labels_int = np.empty(nx_graph.number_of_nodes(), dtype=np.float32)
+            labels_int = np.empty(nx_graph.number_of_nodes(), dtype=np.int32)
             for inode, label in enumerate(labels):
                 labels_int[inode] = class_mapping[label]
             labels = labels_int
