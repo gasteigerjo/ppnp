@@ -7,10 +7,12 @@ from .utils import sparse_matrix_to_tensor, sparse_dropout
 sparse_dot = tf.sparse_tensor_dense_matmul
 
 
-def calc_A_hat(adj_matrix: sp.spmatrix) -> sp.spmatrix:
+def calc_A_hat(adj_matrix: sp.spmatrix | sp.sparray) -> sp.spmatrix | sp.sparray:
     nnodes = adj_matrix.shape[0]
     A = adj_matrix + sp.eye(nnodes)
-    D_vec = np.sum(A, axis=1).A1
+    D_vec = np.sum(A, axis=1)
+    if isinstance(A, sp.spmatrix):
+        D_vec = D_vec.A1
     D_vec_invsqrt_corr = 1 / np.sqrt(D_vec)
     D_invsqrt_corr = sp.diags(D_vec_invsqrt_corr)
     return D_invsqrt_corr @ A @ D_invsqrt_corr
