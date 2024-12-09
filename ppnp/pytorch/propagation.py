@@ -1,3 +1,5 @@
+from typing import Union
+
 import numpy as np
 import scipy.sparse as sp
 import torch
@@ -6,7 +8,7 @@ import torch.nn as nn
 from .utils import MixedDropout, sparse_matrix_to_torch
 
 
-def calc_A_hat(adj_matrix: sp.spmatrix | sp.sparray) -> sp.spmatrix | sp.sparray:
+def calc_A_hat(adj_matrix: Union[sp.spmatrix, sp.sparray]) -> Union[sp.spmatrix, sp.sparray]:
     nnodes = adj_matrix.shape[0]
     A = adj_matrix + sp.eye(nnodes)
     D_vec = np.sum(A, axis=1)
